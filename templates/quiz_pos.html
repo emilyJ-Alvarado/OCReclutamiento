@@ -1,0 +1,104 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sistema de diagnóstico de Voluntariado</title>
+            
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">    
+    
+    <link type='text/css' rel='stylesheet' href="{{ url_for('static', filename='quiz.css') }}"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+            integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+            integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+            crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>      
+    
+     <style>
+         
+   
+   video {
+            position: absolute;
+            z-index: 1;
+        }
+
+         canvas {
+              position: relative;
+            z-index: 20;
+         }
+     </style>
+               
+</head>
+
+<body>
+		<nav class="navtop">
+			<div style="width: 100%;">
+				<h1 style="margin-left: 40px;" >Sistema de selección y reclutamiento</h1>
+                <a href="{{ url_for('resultados') }}"  style="color: white;"><i class="fas fa-table"></i>General</a>
+                <a href="{{ url_for('home',id_usuario=account['id']) }}"  style="color: white;"><i class="fas fa-home"></i>Inicio</a>
+				<a href="{{ url_for('profile',id_usuario=account['id']) }}"  style="color: white;"><i class="fas fa-user"></i>{{ username }}</a>  
+				<a href="{{ url_for('logout') }}" style="color: white;"><i class="fas fa-sign-out-alt"></i>Cerrar Sesión</a>
+			</div>
+		</nav>
+		
+		<div id="container" style="background: orange; color: #eaebed;">
+
+            <div class="container row" style= "opacity: 0.95;max-width: 100% !important; padding: 0;margin-top: 50px;">
+    
+                <div class="card border-success mb-3 col" style= "border: 2px solid red !important;">
+                    <div id="title" class="card-header" style="color: #3775b9;">Marque según corresponda:</div>
+                    <div class="card-body text-success" style="color: #3775b9 !important; text-align: center;">
+                        <div id='quiz'></div>
+                    </div>
+                    <div class="card-footer bg-transparent ">
+                     
+                        <div class='button btn btn-success' style="background-color: green;border-color: green;" id='next'><a href='#'>Sig.</a></div>
+                		<div class='button btn btn-warning' style="background-color: deepskyblue; border-color: deepskyblue;" id='prev'><a href='#'>Ant.</a></div>                		
+                		<div class='button btn btn-danger' id='start'> <a href='#'>Reiniciar</a></div>
+                		<div style="display:none;" class='button btn btn-danger' id='guardar'> <a href='#'>Guardar</a></div>                		
+                		
+                    </div>
+                </div>
+                
+                <div class="card border-success mb-3 col" style= "border: 2px solid red !important;">
+                
+                    <div id="title" class="card-header " style="color: #3775b9;">Video</div>
+                    <div class="card-body text-success " style="color: #3775b9 !important; text-align: center;">
+                    
+                    
+                    <div id="video-container">
+                     
+                     <video id="video" width="600px" height="250px" autoplay muted></video>
+                     
+                     <canvas id="overlay">
+                    
+                    
+                    
+                    </div>
+                
+                <p id= "recomiendaPreTest" style="display:none; color: red; font-style: italic; text-align: center; box-shadow: 0 0 5px 0 red; margin: 25px 0; padding: 10px; background-color: #fff;"">Este test solo se puede realizar una vez. </p>                
+            </div>
+    	</div>
+        
+        <meta id="postulante-id" data-name="{{account['id']}}" >
+		<script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js'></script>
+		<script type=text/javascript>
+              $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+        </script>
+		<script type='text/javascript' src={{ url_for('static', filename='js/quiz_pos.js') }}></script>
+	</body>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js"></script>
+        <script type="text/javascript" src="{{ url_for('static', filename = 'js/face-api.min.js') }}"></script>
+        <script type="text/javascript" src="{{ url_for('static', filename = 'js/index.js') }}"></script>
+	
+</html>

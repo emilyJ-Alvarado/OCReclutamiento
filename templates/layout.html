@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta id="postulante-id" data-name="{{account['id']}}" >
+		<title>{% block title %}{% endblock %}</title>
+		<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+		<script type=text/javascript>
+              $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+        </script>        
+        <script>
+        $(document).ready(function(){
+
+        {% if aceptacion_terminos == 0 %}
+            swal({
+              title: "Confirme si el postulante está habilitado para realizar test.",
+              text: "Los resultados alcanzados en el test son confidenciales.",
+              icon: "info",
+              buttons: ["No está habilitado :(", "Si está habilitado :)"],
+            })
+            .then((willDelete) => {
+              if (willDelete) {
+                  var id_usuario = $('#postulante-id').data("name");                
+                  $.getJSON($SCRIPT_ROOT + '/terminos_condiciones/'+id_usuario, {
+                    //a: 5,
+                    //b: 10,
+                    //selections: JSON.stringify(selections)
+                  }, function(data) {                      
+                        swal(data.result, {
+                          icon: "success",
+                        });     
+                        
+                        $("#ocultarEspecial").hide();
+                  });                 
+              
+
+              } else {
+                swal("No se puede realizar el test al postulante mientras no esté habilitado", {
+                  icon: "error",
+                });
+              }
+            });
+        {% endif %}
+        });
+        
+
+
+        </script>
+        			
+	</head>
+	<body class="loggedin" >
+		<nav class="navtop">
+			<div style="width: 100%;">
+				<h1 style="margin-left: 40px;" >Sistema de selección y reclutamiento</h1>
+                <a href="{{ url_for('resultados') }}" style="color: white;"><i class="fas fa-table"></i>General</a>                
+                <a href="{{ url_for('home',id_usuario=account['id']) }}" style="color: white;"><i class="fas fa-home"></i>Inicio</a>                              
+				<a href="{{ url_for('profile',id_usuario=account['id']) }}" style="color: white;"><i class="fas fa-user"></i>{{ username }}</a>  
+				<a href="{{ url_for('logout') }}"  style="color: white;"><i class="fas fa-sign-out-alt" ></i>Cerrar Sesión</a>
+			</div>
+		</nav>
+		<div class="content">
+			{% block content %}{% endblock %}
+		</div>
+	</body>
+</html>

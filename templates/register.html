@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Registro</title>
+		<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
+	</head>
+	<body>
+		<nav class="navtop">
+			<div style="width: 100%;">
+				<h1 style="margin-left: 40px;"  style="color: white;">Sistema de selección y reclutamiento</h1>
+                <a href="{{ url_for('resultados') }}"  style="color: white;"><i class="fas fa-table"></i>General</a>                
+				<a href="{{ url_for('logout') }}"  style="color: white;"><i class="fas fa-sign-out-alt"></i>Cerrar Sesión</a>
+			</div>
+		</nav>		
+		<div class="register" style="border: 8px solid red;width: 450px;margin: 50px auto;">
+			<h1>Registro</h1>
+			<div class="links">
+				<a href="{{ url_for('register') }}" class="active">Registro</a>
+			</div>
+			<form action="{{ url_for('register') }}" method="post" autocomplete="off" style="width: 370px;margin: 40px;padding-top:0px;">
+				<label for="username">
+					<i class="fas fa-user"></i>
+				</label>
+				<input type="text" name="username" placeholder="Usuario" id="username" required>				
+
+				<!-- -->
+				<label for="correo">
+					<i class="fas fa-user"></i>
+				</label>
+				<input type="email"  placeholder="correo" name="correo" id="correo" required>				
+				<!-- -->
+
+				<!-- -->
+				<label for="dni">
+					<i class="fas fa-user"></i>
+				</label>
+				<input type="number"  placeholder="dni" name="dni" id="dni" min="10000000" max="99999999" required>				
+				<!-- -->
+
+				<!-- -->
+				<label for="nombre">
+					<i class="fas fa-user"></i>
+				</label>
+				<input type="text"  placeholder="nombre" name="nombre" id="nombre" required>				
+				<!-- -->
+				
+				<!-- -->
+				<label for="apellido">
+					<i class="fas fa-user"></i>
+				</label>
+				<input type="text"  placeholder="apellido" name="apellido" id="apellido" required>								
+				<!-- -->
+
+				<!-- -->
+				<label for="edad">
+					<i class="fas fa-user"></i>
+				</label>
+				<input type="number"  placeholder="edad" name="edad" id="edad" min="18" max="100" required>								
+				<!-- -->
+                <br>
+				<!-- -->
+				<label for="sexo">
+                  <i class="fas fa-user"></i>
+                </label>
+                <select name="sexo" id="sexo"  style="width: 310px; height: 50px; border: 1px solid #dee0e4; margin-bottom: 20px; padding: 0 15px;" required>
+                  <option value="Masculino">Masculino</option>
+                  <option value="Femenino">Femenino</option>
+                  <option value="otro">Otro</option>
+                </select>
+							
+				<!-- -->
+
+				<!-- -->
+				<label for="universidad">
+					<i class="fas fa-user"></i>
+				</label>
+				<input type="text"  placeholder="universidad"  name="universidad" id="universidad" required>								
+				<!-- -->
+
+				<!-- -->
+				<label for="carrera">
+					<i class="fas fa-user"></i>
+				</label>
+				<input type="text" placeholder="carrera" name="carrera" id="carrera" required>								
+				<!-- -->
+
+				<!-- -->
+				<label for="ciclo">
+					<i class="fas fa-user"></i>
+				</label>
+				<input type="number" placeholder="ciclo" name="ciclo" id="ciclo" min="1" max="10" required>								
+				<!-- -->
+
+				<!-- -->
+				<label for="tipo_usuario">
+                <i class="fas fa-user"></i>
+            </label>
+            <select name="tipo_usuario" id="tipo_usuario" style="width: 310px; height: 50px; border: 1px solid #dee0e4; margin-bottom: 20px; padding: 0 15px;" required>
+                <option value="0">Postulante</option>
+                <option value="1">Reclutador</option>
+            </select>								
+				<!-- -->
+
+				<!-- -->
+				<label for="cargo">
+					<i class="fas fa-user"></i>
+				</label>
+				<input type="text" placeholder="cargo" name="cargo" id="cargo" required>								
+				<!-- -->
+												
+				<label for="password">
+					<i class="fas fa-lock"></i>
+				</label>
+				<input type="password" name="password" placeholder="Clave" id="password" required>
+				<div class="msg">{{ msg }}</div>
+				<input type="submit" value="Registro" style="" >
+
+			</form>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,116 @@
+<script>
+     function mensaje2() {
+  swal({
+  title: '¿Es el postulante?',
+  text: "Verifica los datos ",
+  type: 'warning',
+  
+  buttons: ["Si es", "No es"],
+})
+.then((willDelete) => {
+  if (willDelete) {
+  swal("No podemos habilitar la entrevista.", {
+    icon: "error",
+  });                
+  
+
+  } else {
+    window.location.href = "{{ url_for('quiz_pos',id_usuario=account['id']) }}"; 
+  }
+});
+}
+
+</script>
+
+{% extends 'layout.html' %}
+
+{% block title %}Perfil{% endblock %}
+
+{% block content %}
+<div style="text-align: left;width: 485px;margin: auto;margin-top: 100px;border: 5px solid #C40A0A ;border-radius: 20px;">
+    <p style="font-size: 24px;font-weight: 500;" >Detalles de la cuenta del postulante:</p>
+
+    <table style="display: inline;">
+        <tr>
+            <td>Nombres:</td>
+            <td>{{ account['nombre'] }}</td>
+        </tr> 
+        
+        <tr>
+            <td>Apellidos:</td>
+            <td>{{ account['apellido'] }}</td>
+        </tr>         
+
+        <tr>
+            <td>Correo:</td>
+            <td>{{ account['correo'] }}</td>
+        </tr> 
+
+        <tr>
+            <td>D.N.I.:</td>
+            <td>{{ account['dni'] }}</td>
+        </tr>
+               
+        <tr>
+            <td>Edad:</td>
+            <td>{{ account['edad'] }}</td>
+        </tr> 
+
+        <tr>
+            <td>Sexo:</td>
+            <td>{{ account['sexo'] }}</td>
+        </tr>                                 
+               
+        <tr>
+            <td>Usuario:</td>
+            <td>{{ account['username'] }}</td>
+        </tr>        
+
+        <tr>
+            <td>Universidad:</td>
+            <td>{{ account['universidad'] }}</td>
+        </tr>
+         
+        <tr>
+            <td>Carrera:</td>
+            <td>{{ account['carrera'] }}</td>
+        </tr>
+        
+        <tr>
+        {% if account['post_test'] != -1 %} 
+            {% if account['aceptado'] == 0 %}                    
+                <td>Voluntariado:</td>
+                <td>
+                <a href="{{ url_for('contratar',id_usuario=account['id'],band=1) }}"><i class="fas fa-user-check"></i>Aceptar Voluntariado</a>                        
+                </td>   
+            {% elif  account['aceptado']  == 1 %}
+                <td>Voluntariado:</td>                
+                <td>
+                <a href="{{ url_for('contratar',id_usuario=account['id'],band=0) }}"><i class="fas fa-user-slash"></i>Retirar Voluntariado</a>                        
+                </td>   
+            {% endif %}
+        {% endif %}
+        </tr>
+                                                        
+    </table>
+    
+    {% if account['post_test'] == -1 %}  
+                          
+         <div style="text-align: center; width: auto; margin: auto; height: 20px; padding: 10px 0px 40px 0;" >
+          <a   style="color: black;"></i> Antes de empezar verfifique los datos del postulante.</a>
+          <a   style="height: 20px;"></a>
+         <button onClick="mensaje2()" class="btn btn-success" style=" border:solid green; background-color: green;color: white;padding: 5px 10px;" 
+         id="link_pretest">Empezar entrevista</button>
+                
+              </div>
+   
+          
+    {% endif %}
+    
+                               
+</div>
+
+
+
+
+{% endblock %}

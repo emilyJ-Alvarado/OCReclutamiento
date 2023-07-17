@@ -1,0 +1,50 @@
+{% extends 'layout.html' %}
+
+{% block title %}Inicio{% endblock %}
+
+{% block content %}
+
+
+                {% if aceptacion_terminos == 0 %}  
+                    <div id= "ocultarEspecial" class="col-sm-12 py-2" style="border: 2px solid red;width: 600px; margin: auto; margin-top: 20px;border-radius: 30px;padding: 10px;">
+                        <div class="card h-100">
+                            <div class="card-body" style="text-align: center;">
+                                <h5 id="title" class="card-title" style="margin-bottom: 5px;margin-top: 0px;">¡Aviso sobre el Test!</h5>
+                                <p style="margin: 0;" class="card-text">Encontrará preguntas que ayuden a determinar si un postulante cumple con 
+                                el perfil general y cualidades para ser un voluntario.</p>                                 
+                            </div>
+                        </div>
+                    </div>                                        
+                 {% endif %} 
+
+
+                {% if post_test == -1 %}                
+                    
+                    <div class="col-sm-12 py-2" style="border: 1px solid gold; opacity: 0.8;width: 400px; margin:  150px auto; border-radius: 30px;">
+                        <div class="card h-100">
+                            <div class="card-body" style="text-align: center;">
+                                <h5 id="title" class="card-title" style="margin-bottom: 14px;margin-top: 0px;">Pasa el test inteligente</h5>
+                                <p style="margin: 0px 0px 25px 0px;" class="card-text">Descubramos si {{ username }} esta list@ para ser un@ voluntari@ :)!</p>                                
+                                {% if pre_test != -1 %}    
+                                <a  style=" border: 4px solid gold; background-color: goldenrod;color: white;padding: 0.5em 1.0em;text-decoration: none;" 
+                                id="link_pretest" href="{{ url_for('quiz_pos',id_usuario=account['id']) }}" class="btn btn-primary">Test</a>
+                                {% endif %}                                
+                            </div>
+
+                        </div>                       
+                    </div>
+                {% endif %}
+                
+                {% if post_test >= 0 %}  
+                    <div class="col-sm-12 py-2" style="width: 600px; margin: auto; margin-top: 10px;border-radius: 30px;">
+                        <div class="card h-100">
+                            <div class="card-body" style="text-align: center;">
+                                <h5 id="title" class="card-title" style="margin-bottom: 14px;margin-top: 0px;">¡El test del postulante ya ha sido completado!</h5>
+                                <p style="margin: 0px 0px 10px 0px;" class="card-text"><HR> EL POSTULANTE DEBE ESPERAR UN AVISO PARA SABER SI FUE SELECCIONADO O SI PUEDE REALIZAR UN NUEVO TEST.</p>
+                                <img id='' width="450px" height="450px" src='/static/images/intro/voluntario.jpg'>                                    
+                            </div>
+                        </div>
+                    </div>                                        
+                 {% endif %}                                       
+{% endblock %}
+

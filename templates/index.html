@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Inicio de Sesión</title>
+		<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        	
+	</head>
+	<body style="">
+		<nav class="navtop">
+			<div>
+				<h1 style="text-align: center; display: grid;">Sistema de selección y reclutamiento</h1>
+			</div>
+		</nav>	
+		<div class="login" style="border: 2px solid #C40A0A;width: 500px;margin: 50px auto">
+			<h1>Inicio de sesión</h1>
+			<div class="links">
+				<a href="{{ url_for('login') }}" class="active">Entrar</a>
+			</div>
+			<form action="{{ url_for('login') }}" method="post" style="margin: 50px;padding-top:0px;" >
+				<label for="username">
+					<i class="fas fa-user"></i>
+				</label>
+				<input type="text" name="username" placeholder="Usuario" id="username" required>
+                <div style="display: inline-flex;">
+				<label for="password" style="">
+					<i class="fas fa-lock"></i>
+				</label>
+				<input type="password" name="password" placeholder="Contraseña" id="password" required>
+				</div>
+				<div class="msg">{{ msg }}</div>
+				<input type="submit" value="Entrar" style="width: 700px">
+				
+			</form>
+		</div>
+	</body>
+</html>
